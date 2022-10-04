@@ -30,7 +30,24 @@ type Employee struct {
 }
 
 func Connect() error {
+	client, err := mongo.NewClient(options.Client().ApplyURI(mongoURI))
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
 
+	err = client.Connect(ctx)
+	db := client.Database(dbName)
+
+	// Handle the error from the mongodb connection
+	if err != nil {
+		return err
+	}
+
+	// Initialize the MongoDb Instance using the Mongo struct
+	mg = MongoInstance{
+		Client: client,
+		Db:     db,
+	}
+	return nil
 }
 
 func main() {
