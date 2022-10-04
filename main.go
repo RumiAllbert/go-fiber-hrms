@@ -51,5 +51,18 @@ func Connect() error {
 }
 
 func main() {
+	if err := Connect(); err != nil {
+		log.Fatal(err)
+	}
+
+	app := fiber.New()
+
+	// Set up routing methods
+	app.Get("/employee", func(c *fiber.Ctx) error {
+
+	})
+	app.Post("/employee")
+	app.Put("/employee/:id")
+	app.Delete("/employee/:id")
 
 }
