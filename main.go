@@ -23,10 +23,10 @@ const dbName = "fiber-hrms"
 const mongoURI = "mongodb://localhost:27017" + dbName
 
 type Employee struct {
-	ID     string
-	Name   string
-	Salary float64
-	Age    int64
+	ID     string  `json:"id,omitempty" bson:"_id, omitempty"`
+	Name   string  `json:"name"`
+	Salary float64 `json:"salary"`
+	Age    int64   `json:"age"`
 }
 
 func Connect() error {
@@ -54,12 +54,15 @@ func main() {
 	if err := Connect(); err != nil {
 		log.Fatal(err)
 	}
-
+	// Init fiber connection
 	app := fiber.New()
 
 	// Set up routing methods
 	app.Get("/employee", func(c *fiber.Ctx) error {
 
+		query := bson.D{{}}
+
+		var employees []Employee = make(Employee, 0)
 	})
 	app.Post("/employee")
 	app.Put("/employee/:id")
