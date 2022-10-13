@@ -9,6 +9,10 @@
 3. Run `go run main.go` to start the server
 4. Open `http://localhost:3000` in your browser
 
+### NOTE
+
+- There is currently no front-end for this project. You can use Postman to test the API. If you'd like to contribute, please feel free to do so.
+
 ## Endpoints and API
 
 1. GET /employee
@@ -16,12 +20,6 @@
 3. POST /employee
 4. PUT /employee/:id
 5. DELETE /employee/:id
-
-## Requirements
-
-1. Go 1.16+
-2. MongoDB
-
 
 ## Sample Request
 
@@ -32,4 +30,9 @@
     "email": "johndoe@gmail.com",
     "age": 45,
     "salary": 12353
-}
+}```
+
+## Requirements
+
+1. Go 1.16+
+2. MongoDB
