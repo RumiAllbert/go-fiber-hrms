@@ -11,7 +11,7 @@
 
 ### NOTE
 
-- There is currently no front-end for this project. You can use Postman to test the API. If you'd like to contribute, please feel free to do so.
+- There is currently no front-end for this project. You can use Postman or Paw to test the API. If you'd like to contribute, please feel free to do so.
 
 ## Endpoints and API
 
@@ -31,6 +31,7 @@
     "age": 45,
     "salary": 12353
 }
+```
 
 ## Requirements
 
