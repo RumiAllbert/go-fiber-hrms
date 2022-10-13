@@ -62,9 +62,45 @@ func main() {
 
 		query := bson.D{{}}
 
-		var employees []Employee = make(Employee, 0)
+		cursor, err = mg.Db.Collection("/employees").Find(c.Context(), query)
+		if err != nil {
+			return c.Stattus(500).SendString(err.Error)
+		}
+
+		var employees []Employee = make([]Employee, 0)
+
+		if err := cursor.All(c.Context(), &employees); err != nil {
+			return c.Stattus(500).SendString(err.Error())
+		}
+		return c.JSON(employees)
 	})
-	app.Post("/employee")
+
+	app.Post("/employee", func(c *fiber.Ctx) error {
+		collection := mg.Db.Collection("employees")
+
+		employee := new(Employee)
+
+		if err := c.BodyParse(employee); err != nil {
+			return c.Status(400).SendString(err.Error())
+		}
+
+		employee.ID = ""
+
+		insertionResult, err := collection.InsertOne(c.Context(), employee)
+		if err != nil {
+			return c.Status(400).SendString(err.Error())
+		}
+
+		filter := bson.D{{key: "_id", Value: insertionResult.InsertedID}}
+		createdRecord := collection.FindOne(c.context(), filter)
+
+		createdEmployee := &Employee{}
+		createdRecord.Decode(createdEmployee)
+
+		return c.Status(201).JSON(createdEmployee)
+
+	})
+
 	app.Put("/employee/:id")
 	app.Delete("/employee/:id")
 
