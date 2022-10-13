@@ -30,7 +30,7 @@
     "email": "johndoe@gmail.com",
     "age": 45,
     "salary": 12353
-}```
+}
 
 ## Requirements
 
